@@ -33,7 +33,7 @@ destroy:validate
 ## make tfdocs - Gerar documentação do Terraform
 tfdocs:
 	@docker run --rm --volume "$$(pwd):/terraform-docs" -u $$(id -u) quay.io/terraform-docs/terraform-docs:0.18.0 markdown /terraform-docs > docs/tfdoc.md
-	@cat docs/.header.md docs/tfdoc.md > README.md
+	#@cat docs/HEADER.md docs/tfdoc.md > README.md
 	
 ## make clean - remover variáveis de ambiente
 clean:
