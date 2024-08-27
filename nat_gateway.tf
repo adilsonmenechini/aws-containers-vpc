@@ -1,6 +1,6 @@
 resource "aws_eip" "nat_eips" {
   count = var.enabled_nat_gateway ? length(var.public_subnets) : 0
-  
+
   domain = "vpc"
 
   tags = {

@@ -8,11 +8,6 @@ variable "azs" {
   type        = list(string)
 }
 
-variable "azs" {
-  description = "List of availability zones"
-  type        = list(string)
-}
-
 variable "private_subnets" {
   description = "List of CIDR blocks for private subnets"
   type        = list(string)
@@ -47,6 +42,12 @@ variable "enabled_nat_gateway" {
 
 variable "enabled_ssm_parameters" {
   description = "Enable or disable the creation of SSM parameters"
+  type        = bool
+  default     = true
+}
+
+variable "enabled_public_route_table" {
+  description = "Enable or disable the creation of public route table"
   type        = bool
   default     = true
 }

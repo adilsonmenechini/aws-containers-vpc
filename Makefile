@@ -12,28 +12,29 @@ help:
 
 ## make init - Terraform init
 init: 
-	@terraform init
+	@terraform init -var-file=environment/dev/backend.tfvars
 
 validate:
-	@terraform validate && terraform fmt --recursive
+	@terraform validate 
+	@terraform fmt --recursive 
 
 ## make plan - Terraform plan
 plan:validate
-	@terraform plan -var-file=”environment/dev/terraform.tfvars” -out=plan
+	@terraform plan -var-file=environment/dev/terraform.tfvars
 
 ## make apply - Terraform apply
 apply:
-	@terraform apply plan
-
+	@terraform apply --auto-approve -var-file=environment/dev/terraform.tfvars
 
 ## make destroy - Terraform destroy
 destroy:validate
-	@terraform apply -destroy
+	terraform destroy -var-file=environment/dev/terraform.tfvars
 
 ## make tfdocs - Gerar documentação do Terraform
 tfdocs:
 	@docker run --rm --volume "$$(pwd):/terraform-docs" -u $$(id -u) quay.io/terraform-docs/terraform-docs:0.18.0 markdown /terraform-docs > docs/tfdoc.md
 	@cat docs/.header.md docs/tfdoc.md > README.md
+	
 ## make clean - remover variáveis de ambiente
 clean:
 	@rm -rf terraform.* .terraform.* .terraform* plan *-config
